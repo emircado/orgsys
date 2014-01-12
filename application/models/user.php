@@ -12,7 +12,7 @@ class User extends CI_Model{
 		$query = $this->db->query(
 			"SELECT U.userid as userid,
 				U.username as username,
-				R.name as role
+				R.name as user_role
 			FROM `User` U JOIN `Role` R ON (U.roleid = R.roleid)
 			WHERE U.username = '$username'
 				AND U.password = '$password'
@@ -22,7 +22,7 @@ class User extends CI_Model{
 		if (count($query->result()) != 1) {
 			return false;
 		} else {
-			return $query->result()[0];
+			return $query->row_array();
 		}
 	}
 }

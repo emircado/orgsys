@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `User` (
 	`name` VARCHAR(100) NOT NULL,
 	`password` VARCHAR(20) NOT NULL,
 	`roleid` SMALLINT(9) NOT NULL,
-	`status` BOOLEAN DEFAULT 1,		--if disabled or not
+	`status` BOOLEAN DEFAULT 1,
 	CONSTRAINT `UserPK` PRIMARY KEY (`userid`),
 	CONSTRAINT `UserFK` FOREIGN KEY (`roleid`) REFERENCES `Role` (`roleid`)
 ) ENGINE=InnoDB;
@@ -27,7 +27,7 @@ INSERT INTO `Role` (`roleid`, `name`) VALUES
 (3, 'Unit Head');
 
 INSERT INTO `User` (`username`, `name`, `password`, `roleid`) VALUES
-('sirji', 'Ji Reyes', 'password', 0),
-('dcshead', 'Cedric Festin', 'password', 2),
-('eeeihead', 'Someone Cool', 'password', 2),
-('reviewer1', 'Sir Mark', 'password', 1);
+('sirji', 'Ji Reyes', 'password', 1),
+('dcshead', 'Cedric Festin', 'password', 3),
+('eeeihead', 'Someone Cool', 'password', 3),
+('reviewer1', 'Sir Mark', 'password', 2);

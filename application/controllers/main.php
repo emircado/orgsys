@@ -20,9 +20,15 @@ class Main extends CI_Controller {
 			$this->load->view('UserUI/login');
 			$this->load->view('headandfoot/footer');
 		//redirect to user home page
+		} else if ('Unit Head' == $session_data['user_role']) {
+			redirect('unithead', 'refresh');
 		} else {
-			redirect($session_data['user_role'], 'refresh');
-		}
+			redirect('main', 'refresh');		
+		}// else if ('Associate Dean' == $session_data['user_role']) {
+		//	redirect('assocdean', 'refresh');
+		//} else if ('Reviewer' == $session_data['user_role']) {
+		//	redirect('reviewer', 'refresh');
+		//}
 	}
 
 	public function login() {
@@ -39,12 +45,7 @@ class Main extends CI_Controller {
 			$result = $this->user->check_user($username, $password);
 
 			if ($result != false) {
-				$sess_array = array(
-					'username' => $result->username,
-					'user_role' => $result->role
-				);
-
-				$this->session->set_userdata('current_user', $sess_array);
+				$this->session->set_userdata('current_user', $result);
 			}
 		}
 		

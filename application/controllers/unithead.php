@@ -29,7 +29,7 @@ class UnitHead extends CI_Controller {
 		}
 
 		//only unit heads can access the page
-		if (isset($data['user_role']) && $data['user_role'] == 'unithead') {
+		if (isset($data['user_role']) && $data['user_role'] == 'Unit Head') {
 			switch($key) {
 				case 0:
 					$data['title'] = 'Manage Organizations';

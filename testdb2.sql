@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `Requirement` (
 	`reqid` INTEGER AUTO_INCREMENT,
 	`name` VARCHAR(100) NOT NULL,
 	`description` TEXT,
-	`userid` SMALLINT(99) NOT NULL,
+	`userid` INTEGER NOT NULL,
 	`syid` INTEGER NOT NULL,
 	CONSTRAINT `RequirementPK` PRIMARY KEY (`reqid`),
 	CONSTRAINT `RequirementFKUser` FOREIGN KEY (`userid`) REFERENCES `User` (`userid`),
