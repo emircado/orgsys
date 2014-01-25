@@ -25,4 +25,29 @@ class User extends CI_Model{
 			return $query->row_array();
 		}
 	}
+
+	public function get_roles() {
+		$query = $this->db->query(
+			"SELECT R.roleid as roleid,
+				R.name as rolename
+			FROM `Role` R"
+		);
+
+		return $query->result();
+	}
+
+	public function create_user($userdata) {
+		$query = $this->db->insert('user', $userdata);
+	}
+
+	public function get_users() {
+		$query = $this->db->query(
+			"SELECT U.username as username,
+				U.name as name,
+				U.roleid as roleid
+			FROM `User` U"
+		);
+
+		return $query->result();
+	}
 }

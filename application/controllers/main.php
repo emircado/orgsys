@@ -7,6 +7,7 @@ class Main extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model(array('user', 'requirement'));
+		$this->userlist = array('Unit Head', 'Associate Dean', 'Reviewer');
 	}
 
 	public function index() { 
@@ -15,27 +16,32 @@ class Main extends CI_Controller {
 
 		//if there is no logged in user
 		if ($session_data == NULL) {
+			$this->login_page();
+		
+		//go to home page
+		} else if (in_array($session_data['user_role'], $this->userlist)) {
 			$data['title'] = 'Home';
+			$data['curr_user'] = $session_data;
+
 			$this->load->view('headandfoot/header', $data);
-			$this->load->view('UserUI/login');
+			$this->load->view('headandfoot/nav', $data);
+			$this->load->view('MainUI/home', $data);
 			$this->load->view('headandfoot/footer');
-		//redirect to user home page
-		} else if ('Unit Head' == $session_data['user_role']) {
-			redirect('unithead', 'refresh');
 		} else {
-			redirect('main', 'refresh');		
-		}// else if ('Associate Dean' == $session_data['user_role']) {
-		//	redirect('assocdean', 'refresh');
-		//} else if ('Reviewer' == $session_data['user_role']) {
-		//	redirect('reviewer', 'refresh');
-		//}
+			//error: role not found
+		}
+	}
+
+	private function login_page() {
+		$data['title'] = 'Home';
+		$this->load->view('headandfoot/header', $data);
+		$this->load->view('MainUI/login');
+		$this->load->view('headandfoot/footer');
 	}
 
 	public function login() {
-		$this->form_validation->set_rules('username', 'Username', 'trim|required');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required');
-		
-		$error_msg = NULL;
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|check_username');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|check_userpass');
 
 		if ($this->form_validation->run()) {
 			$username = $this->input->post('username');
@@ -43,13 +49,20 @@ class Main extends CI_Controller {
 
 			//check db for username & password comination
 			$result = $this->user->check_user($username, $password);
-
+	
 			if ($result != false) {
+				//SESSION DATA CONTAINS
+				// - userid
+				// - username
+				// - role
+
 				$this->session->set_userdata('current_user', $result);
 			}
-		}
+			redirect('main', 'refresh');
 		
-		redirect('main', 'refresh');
+		} else {
+			$this->login_page();
+		}	
 	}
 
 	public function logout() {
