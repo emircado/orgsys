@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS `Department` (
+	`deptid` SMALLINT(19),
+	`name` VARCHAR(100) UNIQUE,
+	`userid` INTEGER NOT NULL
+	CONSTRAINT `RolePK` PRIMARY KEY (`roleid`)
+) ENGINE=InnoDB;
