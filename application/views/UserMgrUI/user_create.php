@@ -1,13 +1,21 @@
 <div>
-	<?php
-		echo validation_errors();
-		echo 'Create User';
-		echo form_open('users/submit_user');
-		echo form_label('Name', 'name').form_input('name').'<br/>';
-		echo form_label('Username', 'username').form_input('username').'<br/>';
-		foreach ($roles as $r) {
-			echo form_label("$r->rolename", 'role[]').form_radio('role[]', $r->roleid).'<br/>';
-		}
-		echo form_submit('create', 'Create').form_close();
-	?>
+	Create User
+	<div class="error" id="user_createerror"></div>
+	<?php echo validation_errors() ?>
+	<form id="user_create" method="post" accept-charset="utf-8" action="<?php echo site_url('users/view') ?>">
+		<label for="name">Name</label>
+			<input type="text" name="name" id="input_createname"/><br/>
+		<label for="username">Username</label>
+			<input type="text" name="username" id="input_createusername"/><br/>
+
+		<!-- CHOOSE ROLE -->
+		<select id="input_createrole" name="role">
+			<option value=0>--Select Role--</option>
+			<?php foreach($roles as $r) {
+				echo '<option value='.$r->roleid.'>'.$r->rolename.'</option>';
+			} ?>
+		</select> <br/>
+
+		<input type="submit" class="createbutton" id="user_createbutton" name="create" value="Create" />
+	</form>
 </div>

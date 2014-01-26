@@ -7,7 +7,7 @@ $(window).load(function (){
 		orgErrorMsg.html('').show()
 	}
 
-	$("#user_loginbutton").click(function(e){
+	$("#user_loginbutton").click(function (e){
 		e.preventDefault()
 		clear_errors()
 
@@ -19,20 +19,25 @@ $(window).load(function (){
 		
 		// check if username - password is in database
 		} else {
-			$.post('/index.php/main/login', 
-				{'username': username, 'password': password},
-				function(isvalid) {
-					if (isvalid) {
-						$("#user_login").submit();
-					} else {
+			$.ajax({
+				type: 'POST',
+				url: BASE_URL+"index.php/main/login",
+				data: {
+					'username': username,
+					'password': password
+				},
+				success: function(result) {
+					if (result == 'good') {
+						$("#user_login").submit()
+					} else if (result == 'bad') {
 						userErrorMsg.html("Invalid username-password combination").show()
 					}
 				}
-			)
+			})
 		}
 	})
 
-	$("#org_loginbutton").click(function(e){
+	$("#org_loginbutton").click(function (e) {
 		e.preventDefault()
 		clear_errors()
 
@@ -43,18 +48,20 @@ $(window).load(function (){
 		
 		// check if key is in database
 		} else {
-			$.post('/index.php/main/org_login',
-				{'key': key},
-				function(isvalid) {
-					if(isvalid) {
+			$.ajax({
+				type: 'POST',
+				url: BASE_URL+"index.php/main/org_login",
+				data: {
+					'key': key
+				},
+				success: function(result) {
+					if (result == 'good') {
 						$("#org_login").submit()
-					} else {
-						orgErrorMsg.html("Invalid key.").show()
+					} else if (result == 'bad') {
+						orgErrorMsg.html("Invalid key").show()
 					}
 				}
-			)
+			})
 		}
 	})
-
-	
 })

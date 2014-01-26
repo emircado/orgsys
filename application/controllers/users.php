@@ -20,11 +20,12 @@ class Users extends CI_Controller {
 
 			$data['title'] = 'Create User Account';
 			$data['roles'] = $this->user->get_roles();
+			$data['script'] = array('codejs/user_create.js');
 
 			$this->load->view('headandfoot/header', $data);
 			$this->load->view('headandfoot/nav', $data);
 			$this->load->view('UserMgrUI/user_create', $data);
-			$this->load->view('headandfoot/footer');
+			$this->load->view('headandfoot/footer', $data);
 		}
 	}
 
@@ -36,27 +37,19 @@ class Users extends CI_Controller {
 			redirect('main', 'refresh');
 
 		} else {
-			$this->form_validation->set_rules('name', 'Name', 'trim|required');
-			$this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[user.username]');
-			$this->form_validation->set_rules('role', 'Role', 'required');
+			//SETUP USER DATA
+			$userdata = array(
+				'name' => $this->input->post('name'),
+				'username' => $this->input->post('username'),
+				'password' => 'password',
+				'roleid' => $this->input->post('role')
+			);
 
-			$this->form_validation->set_message('is_unique', 'Username is taken.');
-
-			if ($this->form_validation->run()) {
-				//SETUP USER DATA
-				$userdata = array(
-					'name' => $this->input->post('name'),
-					'username' => $this->input->post('username'),
-					'password' => 'password',
-					'roleid' => $this->input->post('role')[0]
-				);
-
-				$this->user->create_user($userdata);
-
-				redirect('main', 'refresh');
-
+			if ($this->user->username_exists($userdata['username'])) {
+				echo "bad";
 			} else {
-				$this->create();
+				$this->user->create_user($userdata);
+				echo "good";	
 			}
 		}
 	}

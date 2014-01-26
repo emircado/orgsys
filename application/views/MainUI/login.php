@@ -3,7 +3,7 @@
 	<div>
 		User Log In
 		<div class="error" id="user_loginerror"></div>
-		<form id="user_login" method="post" accept-charset="utf-8" action="<?php echo site_url('main/login') ?>" >
+		<form id="user_login" method="post" accept-charset="utf-8" action="<?php echo site_url('main') ?>" >
 			<label for="username">Username</label>
 				<input type="text" name="username" id="input_username"/><br/>
 			<label for="password">Password</label>

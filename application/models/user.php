@@ -50,4 +50,15 @@ class User extends CI_Model{
 
 		return $query->result();
 	}
+
+	//checks if username is already taken
+	public function username_exists($username) {
+		$query = $this->db->query(
+			"SELECT U.userid as userid
+			FROM `User` U
+			WHERE U.username = '$username'"
+		);
+
+		return count($query->result()) > 0;
+	}
 }

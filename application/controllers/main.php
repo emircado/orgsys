@@ -17,9 +17,10 @@ class Main extends CI_Controller {
 		//if there is no logged in user
 		if ($session_data == NULL) {
 			$data['title'] = 'Home';
+			$data['script'] = array('codejs/login.js');
 			$this->load->view('headandfoot/header', $data);
 			$this->load->view('MainUI/login');
-			$this->load->view('headandfoot/footer');
+			$this->load->view('headandfoot/footer', $data);
 		
 		//go to home page
 		} else if (in_array($session_data['user_role'], $this->userlist)) {
@@ -49,10 +50,9 @@ class Main extends CI_Controller {
 			// - role
 
 			$this->session->set_userdata('current_user', $result);
-			redirect('main', 'refresh');
+			echo "good";
 		} else {
-			//for ajax
-			return false;
+			echo "bad";
 		}
 	}
 
@@ -65,6 +65,6 @@ class Main extends CI_Controller {
 	public function org_login() {
 		$key = $this->input->post('key');
 
-		return false;
+		echo "bad";
 	}
 }
