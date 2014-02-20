@@ -3,10 +3,8 @@
 	
 	<!-- FOR ASSOC DEAN ONLY -->
 	<?php if ('Associate Dean' == $curr_user['user_role']) { ?>
-		SCHOOLYEARS <br/>
-		<a href = "<?php echo site_url('main') ?>">Create New Schoolyear</a><br/>
-		<a href = "<?php echo site_url('main') ?>">View All Schoolyears</a><br/>
-	
+		<a href = "<?php echo site_url('schoolyears') ?>">Manage School Years</a> <br/>
+
 		USER ACCOUNTS <br/>
 		<a href = "<?php echo site_url('users') ?>">View User Accounts</a><br/>
 		<a href = "<?php echo site_url('users/create') ?>">Create a User Account</a><br/>
@@ -28,7 +26,6 @@
 		<a href = "<?php echo site_url('main') ?>">Edit Requirements Checklist</a><br/>
 	<?php } ?>
 	
-	MY ACCOUNT <br/>
-	<a href = "<?php echo site_url('main') ?>">Edit profile</a><br/>
-	<a href = "<?php echo site_url('main') ?>">Change Password</a><br/>
+	<a href = "<?php echo site_url('users/myaccount') ?>">MY ACCOUNT</a><br/>
+	
 </div>

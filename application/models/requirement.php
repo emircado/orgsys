@@ -13,7 +13,7 @@ class Requirement extends CI_Model{
 			"SELECT R.name as reqname,
 				R.description as description,
 				U.name as createdby
-			FROM `Requirement` R JOIN `User` U ON (R.userid = U.userid)
+			FROM `requirement` R JOIN `user` U ON (R.userid = U.userid)
 			WHERE R.syid = $syid"
 		);
 
@@ -24,7 +24,7 @@ class Requirement extends CI_Model{
 		$query = $this->db->query(
 			"SELECT S.syid as syid,
 				S.name as schoolyear
-			FROM `SchoolYear` S
+			FROM `schoolyear` S
 			WHERE S.status = 1
 			ORDER BY S.name DESC
 			LIMIT 1"

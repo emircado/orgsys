@@ -2,6 +2,13 @@
 <html>
 <head>
 	<title><?php echo 'ORgSys - '.$title ?></title>
+
+	<!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url('semantic/packaged/css/semantic.css') ?>"> -->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('codecss/CSS.css') ?>">
+
+	<!-- <script src="<?php echo base_url('semantic/packaged/javascript/semantic.js')?>"></script> -->
+
+
 </head>
 <body>
 	<h1><a href="<?php echo base_url(); ?>">ORgSys</a></h1>

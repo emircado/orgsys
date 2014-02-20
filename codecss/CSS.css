@@ -1,0 +1,11 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	font-family: Liberty Sans;
+}
+
+@font-face {
+	font-family: Liberty Sans;
+	src: url('fonts/LibertySans.ttf');
+}

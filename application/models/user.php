@@ -13,7 +13,7 @@ class User extends CI_Model{
 			"SELECT U.userid as userid,
 				U.username as username,
 				R.name as user_role
-			FROM `User` U JOIN `Role` R ON (U.roleid = R.roleid)
+			FROM `user` U JOIN `role` R ON (U.roleid = R.roleid)
 			WHERE U.username = '$username'
 				AND U.password = '$password'
 			LIMIT 1"
@@ -26,11 +26,38 @@ class User extends CI_Model{
 		}
 	}
 
+	public function check_userpass($userid, $password) {
+		$query = $this->db->query(
+			"SELECT U.userid as userid
+			FROM `user` U
+			WHERE U.userid = $userid
+				AND U.password = '$password'"
+		);
+
+		if (count($query->row()) == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public function user_details($userid) {
+		$query = $this->db->query(
+			"SELECT U.username as username,
+				U.name as name,
+				U.password as password,
+				U.email as email
+			FROM `user` U
+			WHERE U.userid = $userid"
+		);
+			return $query->row();
+	}
+
 	public function get_roles() {
 		$query = $this->db->query(
 			"SELECT R.roleid as roleid,
 				R.name as rolename
-			FROM `Role` R"
+			FROM `role` R"
 		);
 
 		return $query->result();
@@ -44,8 +71,9 @@ class User extends CI_Model{
 		$query = $this->db->query(
 			"SELECT U.username as username,
 				U.name as name,
+				U.email as email,
 				U.roleid as roleid
-			FROM `User` U"
+			FROM `user` U"
 		);
 
 		return $query->result();
@@ -55,10 +83,15 @@ class User extends CI_Model{
 	public function username_exists($username) {
 		$query = $this->db->query(
 			"SELECT U.userid as userid
-			FROM `User` U
+			FROM `user` U
 			WHERE U.username = '$username'"
 		);
 
 		return count($query->result()) > 0;
+	}
+
+	public function update_user($userid, $userdata) {
+		$this->db->where('userid', $userid);
+		$this->db->update('user', $userdata);
 	}
 }

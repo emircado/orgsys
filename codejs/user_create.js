@@ -13,12 +13,12 @@ $(window).load(function (){
 		var username = $("#input_createusername").val().trim()
 		var role = $("#input_createrole").val()
 
-		if(name.length == 0) {
+		if (name.length == 0) {
 			createUserErrorMsg.html('Please input name.').show()
-		} else if (role == 0) {
-			createUserErrorMsg.html('Please choose a role.').show()
 		} else if (username.length == 0) {
 			createUserErrorMsg.html('Please input username.').show()
+		} else if (role == 0) {
+			createUserErrorMsg.html('Please choose a role.').show()
 		} else {
 			//check if username is in db
 			$.ajax({

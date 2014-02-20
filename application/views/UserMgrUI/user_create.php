@@ -1,7 +1,6 @@
 <div>
 	Create User
 	<div class="error" id="user_createerror"></div>
-	<?php echo validation_errors() ?>
 	<form id="user_create" method="post" accept-charset="utf-8" action="<?php echo site_url('users/view') ?>">
 		<label for="name">Name</label>
 			<input type="text" name="name" id="input_createname"/><br/>
@@ -16,6 +15,6 @@
 			} ?>
 		</select> <br/>
 
-		<input type="submit" class="createbutton" id="user_createbutton" name="create" value="Create" />
+		<input type="submit" id="user_createbutton" name="create" value="Create" />
 	</form>
 </div>

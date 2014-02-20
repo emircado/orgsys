@@ -19,7 +19,7 @@ class Main extends CI_Controller {
 			$data['title'] = 'Home';
 			$data['script'] = array('codejs/login.js');
 			$this->load->view('headandfoot/header', $data);
-			$this->load->view('MainUI/login');
+			$this->load->view('MainUI/login2');
 			$this->load->view('headandfoot/footer', $data);
 		
 		//go to home page
