@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `schoolyear` (
 	CONSTRAINT `schoolyearPK` PRIMARY KEY (`syid`)
 ) ENGINE=InnoDB;
 
+-- DATA FOR TESTING
 INSERT INTO `schoolyear` (`syid`, `name`) VALUES 
 (1, '2013-2014');
 
@@ -45,7 +46,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB;
 
 INSERT INTO `user` (`username`, `name`, `password`, `roleid`, `syid`) VALUES
-('sirji', 'Ji Reyes', 'password', 1, 1);
+('sirji', 'Ji Reyes', 'password', 1, 1),
+('dcshead', 'Sir Festin', 'password', 3, 1);
 
 DROP TABLE IF EXISTS `requirement`;
 CREATE TABLE IF NOT EXISTS `Requirement` (
@@ -59,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `Requirement` (
 	CONSTRAINT `requirementFKschoolyear` FOREIGN KEY (`syid`) REFERENCES `schoolyear` (`syid`)
 ) ENGINE=InnoDB;
 
-
+-- FOR TESTING
 INSERT INTO `requirement` (`name`, `description`, `userid`, `syid`) VALUES 
 ('Report on previous AY\'s activities',
 	'Description1||Description2||Description3||Description4',
@@ -82,7 +84,7 @@ INSERT INTO `requirement` (`name`, `description`, `userid`, `syid`) VALUES
 
 DROP TABLE IF EXISTS `department`;
 CREATE TABLE IF NOT EXISTS `department` (
-	`deptid` SMALLINT(19),
+	`deptid` INTEGER AUTO_INCREMENT,
 	`deptcode` VARCHAR(15) UNIQUE NOT NULL,
 	`name` VARCHAR(100) UNIQUE NOT NULL,
 	`userid` INTEGER NOT NULL,
@@ -91,3 +93,21 @@ CREATE TABLE IF NOT EXISTS `department` (
 	CONSTRAINT `departmentFKuser` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`),
 	CONSTRAINT `departmentFKschoolyear` FOREIGN KEY (`syid`) REFERENCES `schoolyear` (`syid`)
 ) ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS `organization`;
+CREATE TABLE IF NOT EXISTS `organization` (
+	`orgid` INTEGER AUTO_INCREMENT,
+	`name` VARCHAR(100) NOT NULL,
+	`code` VARCHAR(20) NOT NULL,
+	`viewkey` VARCHAR(10) UNIQUE NOT NULL,
+	`status` BOOLEAN NOT NULL DEFAULT 1,
+	`userid` INTEGER NOT NULL,
+	`syid` INTEGER NOT NULL,
+	CONSTRAINT `organizationPK` PRIMARY KEY (`orgid`),
+	CONSTRAINT `organizationFKuser` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`),
+	CONSTRAINT `organizationFKschoolyear` FOREIGN KEY (`syid`) REFERENCES `schoolyear` (`syid`)
+) ENGINE=InnoDB;
+
+-- DATA FOR TESTING
+INSERT INTO `organization` (`name`, `code`, `viewkey`, `status`, `userid`, `syid`) VALUES 
+('UP Association of Computer Science Majors', 'upcursor', 'key1', 1, 1, 1);

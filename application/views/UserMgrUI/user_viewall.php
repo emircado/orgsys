@@ -1,4 +1,6 @@
 <div>
+	<a href = "<?php echo site_url('users/create') ?>">Create a User Account</a><br/>
+
 	Users: <br/>
 	<?php
 		foreach ($users as $u) {

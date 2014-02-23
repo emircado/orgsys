@@ -26,6 +26,8 @@ class Users extends CI_Controller {
 			$this->load->view('headandfoot/nav', $data);
 			$this->load->view('UserMgrUI/user_create', $data);
 			$this->load->view('headandfoot/footer', $data);
+		} else {
+			redirect('main', 'refresh');
 		}
 	}
 
@@ -66,6 +68,8 @@ class Users extends CI_Controller {
 			$this->load->view('headandfoot/nav', $data);
 			$this->load->view('UserMgrUI/user_view', $data);
 			$this->load->view('headandfoot/footer');
+		} else {
+			redirect('main', 'refresh');
 		}
 	}
 
@@ -82,6 +86,8 @@ class Users extends CI_Controller {
 			$this->load->view('headandfoot/nav', $data);
 			$this->load->view('UserMgrUI/user_edit', $data);
 			$this->load->view('headandfoot/footer');
+		} else {
+			redirect('main', 'refresh');
 		}
 	}
 	
@@ -141,6 +147,8 @@ class Users extends CI_Controller {
 			$this->load->view('headandfoot/nav', $data);
 			$this->load->view('UserMgrUI/user_viewall', $data);
 			$this->load->view('headandfoot/footer');
+		} else {
+			redirect('main', 'refresh');
 		}
 	}
 }

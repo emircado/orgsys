@@ -7,7 +7,7 @@
 		<label for="username">Username</label>
 			<input type="text" name="username" id="input_createusername"/><br/>
 
-		<!-- CHOOSE ROLE -->
+		<!-- CHOOSE ROLES -->
 		<select id="input_createrole" name="role">
 			<option value=0>--Select Role--</option>
 			<?php foreach($roles as $r) {

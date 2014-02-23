@@ -18,22 +18,22 @@
 		2. The unit head's username depends on the schoolyear and department code. <br/>
 		3. School years in the system are unique. See the list of schoolyears for the list of created ones.<br/>
 		
-		<label for="deptname[]">Name</label><input type="text" name="deptname[]">
-		<label for="deptcode[]">Code</label><input type="text" name="deptcode[]">
+		<label for="deptname1">Name</label><input type="text" name="deptname[]">
+		<label for="deptcode1">Code</label><input type="text" name="deptcode[]">
 		<input type="text" class="dh" name="depthead[]"><br/>
 
-		<label for="deptname[]">Name</label><input type="text" name="deptname[]">
-		<label for="deptcode[]">Code</label><input type="text" name="deptcode[]">
+		<label for="deptname2">Name</label><input type="text" name="deptname[]">
+		<label for="deptcode2">Code</label><input type="text" name="deptcode[]">
 		<input type="text" class="dh" name="depthead[]"><br/>
 
-		<label for="deptname[]">Name</label><input type="text" name="deptname[]">
-		<label for="deptcode[]">Code</label><input type="text" name="deptcode[]">
+		<label for="deptname3">Name</label><input type="text" name="deptname[]">
+		<label for="deptcode3">Code</label><input type="text" name="deptcode[]">
 		<input type="text" class="dh" name="depthead[]"><br/>
 
 		<div id="adder"></div><button id="add_dept_button">Add Department</button>
 
 			
-		<br/><input type="submit" class="createbutton" id="sy_createbutton" name="create" value="Create" />		
+		<br/><input type="submit" id="sy_createbutton" name="create" value="Create" />		
 	</form>
 	<a href="<?php echo site_url('schoolyears') ?>">Cancel</a>
 </div>
