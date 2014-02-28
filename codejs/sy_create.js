@@ -1,9 +1,11 @@
 $(window).load(function (){
 	var add_dept = $("#adder")
 
+	var dept_html = '<label for="deptname[]">Name</label><input type="text" name="deptname[]"><label for="deptcode[]">Code</label><input type="text" name="deptcode[]"><label for="depthead[]">Head</label><input type="text" name="depthead[]"><br/>'
+
 	// var dept_html = '<label for="deptname[]">Name</label><input type="text" name="deptname[]">'
 	// var dept_html2 = '<label for="deptcode[]">Code</label><input type="text" name="deptcode[]">'
-	// var dept_html3 = '<input type="text" class="dh" name="depthead[]"><br/>'
+	// var dept_html3 = '<label for="depthead[]">Head</label><input type="text" name="depthead[]"><br/>'
 
 	var year2 = $("#year2disp")
 	var createSYErrorMsg = $("#sy_createerror")
@@ -14,11 +16,14 @@ $(window).load(function (){
 	var deptcodes = $("input[name='deptcode[]']")
 	var deptheads = $("input[name='depthead[]']")
 
-	// $("#add_dept_button").click(function (e){
-	// 	e.preventDefault()
-	// 	add_dept.before(dept_html+dept_html2+dept_html3)
+	$("#add_dept_button").on("click", function (e){
+		e.preventDefault()
+		add_dept.append(dept_html)
 	
-	// })
+		// deptnames = $("input[name='deptname[]']")
+		// deptcodes = $("input[name='deptcode[]']")
+		// deptheads = $("input[name='depthead[]']")
+	})
 
 	// for (var i = 0; i < deptcount; i+=1) {
 
@@ -40,7 +45,7 @@ $(window).load(function (){
 		}
 	})
 
-	deptcodes.keyup(function (e){
+	deptcodes.on("keyup", function (e){
 		var ind = jQuery.inArray(e.target, deptcodes)
 		$(deptheads[ind]).val($(this).val())
 	})
