@@ -4,7 +4,7 @@ class Organizations extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('organization');
+		$this->load->model(array('organization', 'schoolyear'));
 
 	}
 
@@ -21,7 +21,9 @@ class Organizations extends CI_Controller {
 				|| 'Unit Head' == $data['curr_user']['user_role'])) {
 
 			$data['title'] = 'Create an Organizations';
-			// $data['departments'] = 
+			$data['schoolyear'] = $this->schoolyear->get_active_sy();
+			$data['departments'] = $this->organization->get_unitheads($data['schoolyear']);
+			$data['script'] = array('codejs/org_create.js');
 
 			$this->load->view('headandfoot/header', $data);
 			$this->load->view('headandfoot/nav', $data);

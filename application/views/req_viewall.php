@@ -7,13 +7,13 @@
 	<?php } ?>
 
 	<?php 
-		if (count($schoolyear) == 0) {
+		if ($schoolyear == NULL) {
 			echo '<br/>No active schoolyear.';
 		} else {
 			if (count($reqlist) == 0) {
-				echo 'No final requirements yet for '.$schoolyear[0]->schoolyear;
+				echo 'No final requirements yet for '.$schoolyear->schoolyear;
 			} else {
-				echo '<br/>For the schoolyear '.$schoolyear[0]->schoolyear.
+				echo '<br/>For the schoolyear '.$schoolyear->schoolyear.
 					'<br/>by '.$reqlist[0]->createdby.
 					'<br/><br/>What needs to be submitted?';
 				for($i = 0; $i < count($reqlist); $i++) {

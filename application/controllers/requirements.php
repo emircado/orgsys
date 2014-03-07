@@ -4,17 +4,17 @@ class Requirements extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('requirement');
+		$this->load->model(array('requirement', 'schoolyear'));
 	}
 
 	public function index() {
 		$data['title'] = 'Requirements';
 		$data['value'] = '';
 		//get current school year and requirements
-		$active_sy = $this->requirement->get_active_sy();
+		$active_sy = $this->schoolyear->get_active_sy();
 		$data['schoolyear'] = $active_sy;
-		if (count($active_sy) > 0) {
-			$data['reqlist'] = $this->requirement->get_reqlist($active_sy[0]->syid);
+		if ($active_sy != NULL) {
+			$data['reqlist'] = $this->requirement->get_reqlist($active_sy->syid);
 		}
 
 		//get current user data
@@ -32,10 +32,10 @@ class Requirements extends CI_Controller {
 	public function view(){
 		$data['title'] = 'View Requirements List';
 		$data['curr_user'] = $this->session->userdata('current_user');
-		$active_sy = $this->requirement->get_active_sy();
+		$active_sy = $this->schoolyear->get_active_sy();
 		$data['schoolyear'] = $active_sy;
-		if (count($active_sy) > 0) {
-			$data['reqlist'] = $this->requirement->get_reqlist($active_sy[0]->syid);
+		if ($active_sy != NULL) {
+			$data['reqlist'] = $this->requirement->get_reqlist($active_sy->syid);
 		}
 		$data['value'] = 'hello';
 		//get current user data

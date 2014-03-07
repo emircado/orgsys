@@ -25,11 +25,13 @@ class Organization extends CI_Model{
 		return $query->result();
 	}
 
-	public function get_unitheads() {
+	public function get_unitheads($active_sy) {
 		$query = $this->db->query(
 			"SELECT U.userid as unithead,
 				D.name as deptname
-			FROM `user` U JOIN `department` D ON (U.userid = D.userid)"
+			FROM (`user` U JOIN `department` D ON (U.userid = D.userid))
+				JOIN `schoolyear` S ON (U.syid = S.syid)
+			WHERE S.name = '$active_sy->schoolyear'"
 		);
 
 		return $query->result();

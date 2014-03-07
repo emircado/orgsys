@@ -94,6 +94,9 @@ CREATE TABLE IF NOT EXISTS `department` (
 	CONSTRAINT `departmentFKschoolyear` FOREIGN KEY (`syid`) REFERENCES `schoolyear` (`syid`)
 ) ENGINE=InnoDB;
 
+INSERT INTO `department` (`deptcode`, `name`, `userid`, `syid`) VALUES
+('dcs', 'Department of Computer Science', 2, 1);
+
 DROP TABLE IF EXISTS `organization`;
 CREATE TABLE IF NOT EXISTS `organization` (
 	`orgid` INTEGER AUTO_INCREMENT,
