@@ -25,7 +25,7 @@ class Requirements extends CI_Controller {
 		}
 
 		$this->load->view('headandfoot/header', $data);
-		$this->load->view('ReqListUI', $data);
+		$this->load->view('ReqMgrUI/ReqListUI', $data);
 		$this->load->view('headandfoot/footer');
 	}
 
@@ -47,7 +47,7 @@ class Requirements extends CI_Controller {
 
 		$this->load->view('headandfoot/header', $data);
 		$this->load->view('headandfoot/nav', $data);
-		$this->load->view('req_viewall', $data);
+		$this->load->view('ReqMgrUI/req_viewall', $data);
 		$this->load->view('headandfoot/footer');
 	}
 	
@@ -99,4 +99,71 @@ class Requirements extends CI_Controller {
 		}
 	}
 */
+
+	public function createReq() { 
+		$data['curr_user'] = $this->session->userdata('current_user');
+
+		if ($data['curr_user'] != NULL && 
+			'Associate Dean' == $data['curr_user']['user_role']) {
+			
+			$active_sy = $this->requirement->get_active_sy();
+			$data['schoolyear'] = $active_sy;
+
+			if (count($active_sy) > 0) {
+				$data['reqlist'] = $this->requirement->get_reqlist($active_sy[0]->syid);
+			}
+
+			$data['value'] = 'hello';
+			$session_data = $this->session->userdata('current_user');
+			$data['title'] = 'Create Requirements List';
+
+			$this->load->view('headandfoot/header', $data);
+			$this->load->view('headandfoot/nav', $data);
+			$this->load->view('ReqMgrUI/req_create', $data);
+			$this->load->view('headandfoot/footer');
+		} 
+	} 
+
+	public function submit_req() { 
+		$session_data= $this->session->userdata('current_user');
+
+		//check if there is logged in user
+		if ($session_data == NULL) { 
+			redirect('main', 'refresh');
+
+		} else {
+			//$this->form_validation->set_rules('req[]', 'Requirements', 'trim|required'); 
+			//$this->form_validation->set_rules('desc[]', 'Description', 'trim|required');
+
+			//if ($this->form_validation->run()) {
+			//SETUP USER DATA 
+			$data['req'] = array(); 
+			$data['desc'] = array(); 
+			
+			$i=0;
+			foreach ($this->input->post('req') as $item){
+				$data['req'][$i] = $item; 
+				$i++;
+			}
+
+			$i=0;
+			$this->requirement->delete_reqlist();
+			foreach ($this->input->post('desc') as $item) {
+				if($data['req'][$i]) {
+					$userdata = array( 
+						'name' => $data['req'][$i],
+						'description' => $item,
+						'userid' => '1',
+						'syid' => '1'
+					);
+					$this->requirement->add_reqlist($userdata);
+				}
+				$i++;
+			} 
+			//} 
+			//$this->load->view('UserMgrUI/trial', $userdata);
+			//$this->requirement->delete_reqlist();
+			redirect('main', 'refresh'); 
+		} 
+	}
 }

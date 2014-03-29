@@ -9,22 +9,18 @@ class SchoolYear extends CI_Model{
 
 	/*************************** Get Functions **************************/
 	public function get_schoolyears() {
-		$query = $this->db->query(
-			"SELECT *
-			FROM `schoolyear`"
-		);
-
+		$query = $this->db->get('schoolyear');
 		return $query->result();
 	}
 
 	public function get_active_sy() {
-		$query = $this->db->query(
-			"SELECT S.syid as syid,
-				S.name as schoolyear
-			FROM `schoolyear` S
-			WHERE S.status = 1
-			ORDER BY S.name DESC"
-		);
+		$this->db->select(array(
+			'syid as syid',
+			'name as schoolyear'
+		));
+		$this->db->order_by('name', 'desc');
+
+		$query = $this->db->get_where('schoolyear', array('status' => 1));
 
 		return $query->row();
 	}

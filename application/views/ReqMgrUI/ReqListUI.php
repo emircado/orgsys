@@ -1,13 +1,8 @@
 <div>
-	VIEW REQUIREMENTS <br/>
-
-	<?php if ('Associate Dean' == $curr_user['user_role']) { ?>
-		<a href = "<?php echo site_url('main') ?>">Create Requirements Checklist</a><br/>
-		<a href = "<?php echo site_url('main') ?>">Edit Requirements Checklist</a><br/>
-	<?php } ?>
-
+	<br/>
+		Guidelines on Renewal of Recognition of All UP COE-Based Organizations
 	<?php 
-		if ($schoolyear == NULL) {
+		if (count($schoolyear) == 0) {
 			echo '<br/>No active schoolyear.';
 		} else {
 			if (count($reqlist) == 0) {
