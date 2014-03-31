@@ -37,7 +37,8 @@ class Requirement extends CI_Model{
 		$query = $this->db->query( "DELETE FROM requirement" );
 	}
 
-	public function add_reqlist($userdata) {
+	public function add_reqlist($reqdata) {
+		$this->db->insert('requirement', $reqdata);
 	//foreach ($userdata as $u){ 
 		//$query = $this->db->query( 
 		//"INSERT INTO `requirement`(`name`,) VALUES ($u)" 

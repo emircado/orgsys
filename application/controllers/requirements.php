@@ -106,11 +106,11 @@ class Requirements extends CI_Controller {
 		if ($data['curr_user'] != NULL && 
 			'Associate Dean' == $data['curr_user']['user_role']) {
 			
-			$active_sy = $this->requirement->get_active_sy();
+			$active_sy = $this->schoolyear->get_active_sy();
 			$data['schoolyear'] = $active_sy;
-
+			$data['script'] = array('codejs/button.js');
 			if (count($active_sy) > 0) {
-				$data['reqlist'] = $this->requirement->get_reqlist($active_sy[0]->syid);
+				$data['reqlist'] = $this->requirement->get_reqlist($active_sy->syid);
 			}
 
 			$data['value'] = 'hello';
@@ -141,25 +141,30 @@ class Requirements extends CI_Controller {
 			$data['desc'] = array(); 
 			
 			$i=0;
-			foreach ($this->input->post('req') as $item){
-				$data['req'][$i] = $item; 
-				$i++;
+			if($this->input->post('req')!=NULL){
+				foreach ($this->input->post('req') as $item){
+					$data['req'][$i] = $item; 
+					$i++;
+				}
 			}
 
 			$i=0;
 			$this->requirement->delete_reqlist();
-			foreach ($this->input->post('desc') as $item) {
-				if($data['req'][$i]) {
-					$userdata = array( 
-						'name' => $data['req'][$i],
-						'description' => $item,
-						'userid' => '1',
-						'syid' => '1'
-					);
-					$this->requirement->add_reqlist($userdata);
-				}
-				$i++;
-			} 
+			if($this->input->post('desc')!=NULL){
+				foreach ($this->input->post('desc') as $item) {
+					if($data['req'][$i]) {
+						$reqdata = array( 
+							'name' => $data['req'][$i],
+							'description' => $item,
+							'userid' => $session_data['userid'],
+							'syid' => $this->schoolyear->get_active_sy()->syid
+						);
+						$this->requirement->add_reqlist($reqdata);
+					}
+					$i++;
+				} 
+			}
+			echo '<pre>'.print_r($this->input->post(),TRUE).'</pre>';
 			//} 
 			//$this->load->view('UserMgrUI/trial', $userdata);
 			//$this->requirement->delete_reqlist();
