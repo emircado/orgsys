@@ -1,0 +1,58 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	
+	font-family: KlavikaRg;
+}
+
+@font-face {
+	font-family: KlavikaRg;
+	src: url('fonts/Klavika-Regular.otf');
+}
+.header_links{
+	text-align: right;
+	text-decoration: none;
+}
+.bottom_links {
+	font-size: 14px;
+	line-height: 20px;	
+}
+a:link {
+	color: #000;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration:none;
+	color: #000;
+}
+a:hover {
+	color:#999;
+	text-decoration: underline;
+}
+a:active {
+	text-decoration: none;
+	color: #000;
+}
+.bottom_text {
+	font-size: 14px;
+	text-decoration: none;
+}
+.middle_content {
+	font-weight: bold;
+	font-size: 36px;
+}
+.middle_link {
+	color: #069;
+}
+.middle_link a:link, .middle_link a:active, .middle_link a:visited {
+	color:#069;
+}
+.middle_link a:hover {
+	color: #000;
+	text-decoration: underline;
+}
