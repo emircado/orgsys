@@ -19,7 +19,7 @@
 	<br/>
 <strong><div style="font-size:20px" align="left">REQUIREMENTS</div>
 </strong>
-	<a href = "<?php echo site_url('main') ?>">View Requirements Checklist</a> 
+	<a href = "<?php echo site_url('ReqMgrUI/req_viewall') ?>">View Requirements Checklist</a> 
 	<?php if ('Associate Dean' == $curr_user['user_role']) { ?>
 		|| <a href = "<?php echo site_url('requirements/createreq') ?>">Create Requirements Checklist</a> || 
 		<a href = "<?php echo site_url('requirements/') ?>">Edit Requirements Checklist</a> ||

@@ -1,6 +1,16 @@
 <div>
-	<br/>
-		Guidelines on Renewal of Recognition of All UP COE-Based Organizations
+
+
+</div>
+
+<div>
+
+<table width="70%" border="0" align="center" cellpadding="15" cellspacing="0" class="roundedTable">
+  <tr align="center">
+    <td></td>
+    <td align="center">
+		
+        <h2>Guidelines on Renewal of Recognition of All UP COE-Based Organizations</h2>		
 	<?php 
 		if (count($schoolyear) == 0) {
 			echo '<br/>No active schoolyear.';
@@ -29,4 +39,9 @@
 		}
 	?>
 
+    </td>
+    <td></td>
+  </table>
+
+	
 </div>

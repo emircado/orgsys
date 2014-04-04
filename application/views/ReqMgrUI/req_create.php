@@ -1,7 +1,12 @@
 <div>
-	<?php
+
+<table width="70%" border="0" align="center" cellpadding="15" cellspacing="0" class="roundedTable">
+  <tr align="center">
+    <td></td>
+    <td align="center">
+            	<?php
 		echo validation_errors();
-		echo 'Create Requirements';
+		echo ' <h2>Create Requirements</h2>';
 		echo form_open('requirements/submit_req');
 		for($i = 0; $i < count($reqlist); $i++) {
 			echo ($i+1).'</br>';
@@ -44,4 +49,10 @@
 	var whatever = "<?= $i ?>";
 	</script>
 	<button id="add">Add extra field</button>
+
+    </td>
+    <td></td>
+  </table>
+
+	
 </div>
