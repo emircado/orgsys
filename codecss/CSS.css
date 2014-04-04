@@ -2,10 +2,51 @@
 /* CSS Document */
 
 body {
-	font-family: Liberty Sans;
+	
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	
+	font-family: ProximaNova;
+	background-color:#f0b49e;
+	
+}
 }
 
 @font-face {
 	font-family: Liberty Sans;
 	src: url('fonts/LibertySans.ttf');
+}
+
+@font-face {
+	font-family: KlavikaRg;
+	src: url('fonts/Klavika-Regular.otf');
+}
+
+@font-face {
+	font-family: ProximaNova;
+	src: url('fonts/ProximaNova-Regular.otf');
+}
+
+a:link {
+	text-decoration:underline;
+	color:#000;
+}
+a:visited {
+	text-decoration:underline;
+	color:#000;
+}
+a:hover {
+	text-decoration:underline;
+	color:#000;
+}
+a:active {
+	text-decoration:underline;
+	color:#000;
+}
+
+.roundedTable {
+	border-radius:25px;
+	background-color:#f7e4be
 }
