@@ -59,4 +59,35 @@ class Organizations extends CI_Controller {
 		}
 	}
 
+	public function submit_org() {
+		$session_data = $this->session->userdata('current_user');
+
+		//check if there is logged in user
+		if ($session_data == NULL) {
+			redirect('main', 'refresh');
+
+		} else {
+			//SETUP USER DATA
+			$orgdata = array(
+				'name' => $this->input->post('name'),
+				'code' => $this->input->post('code'),
+				'userid' => $this->input->post('userid'),
+				'viewkey' => $this->input->post('code'),
+				'syid' => 1
+			);
+
+			$this->organization->create_org($orgdata);
+			
+			/*if ($this->user->username_exists($userdata['username'])) {
+				echo "bad";
+			} else {
+				$this->user->create_user($userdata);
+				echo "good";	
+			}*/
+			echo "good";
+		}
+	
+	
+	}
+	
 }

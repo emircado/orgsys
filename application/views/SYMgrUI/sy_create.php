@@ -54,6 +54,26 @@
 		<label for="deptcode[]">Code</label><input type="text" name="deptcode[]">
 		<label for="depthead[]">Head</label><input type="text" name="depthead[]"><br/>
 
+		<label for="deptname[]">Name</label><input type="text" name="deptname[]">
+		<label for="deptcode[]">Code</label><input type="text" name="deptcode[]">
+		<label for="depthead[]">Head</label><input type="text" name="depthead[]"><br/>
+		
+		<label for="deptname[]">Name</label><input type="text" name="deptname[]">
+		<label for="deptcode[]">Code</label><input type="text" name="deptcode[]">
+		<label for="depthead[]">Head</label><input type="text" name="depthead[]"><br/>
+		
+		<label for="deptname[]">Name</label><input type="text" name="deptname[]">
+		<label for="deptcode[]">Code</label><input type="text" name="deptcode[]">
+		<label for="depthead[]">Head</label><input type="text" name="depthead[]"><br/>
+		
+		<label for="deptname[]">Name</label><input type="text" name="deptname[]">
+		<label for="deptcode[]">Code</label><input type="text" name="deptcode[]">
+		<label for="depthead[]">Head</label><input type="text" name="depthead[]"><br/>
+		
+		<label for="deptname[]">Name</label><input type="text" name="deptname[]">
+		<label for="deptcode[]">Code</label><input type="text" name="deptcode[]">
+		<label for="depthead[]">Head</label><input type="text" name="depthead[]"><br/>
+		
 		<div id="adder"></div><button id="add_dept_button">Add Department</button>
 			
 		<br/><input type="submit" id="sy_createbutton" name="create" value="Create" />		

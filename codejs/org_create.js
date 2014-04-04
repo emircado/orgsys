@@ -19,6 +19,23 @@ $(window).load(function (){
 			createOrgErrorMsg.html("Please input an org code.")
 		} else if (role == -1) {
 			createOrgErrorMsg.html("Please choose a department.")
+		} else {
+			$.ajax({
+				type: 'POST',
+				url: BASE_URL+'index.php/organizations/submit_org',
+				data: {
+					'name': name,
+					'code': code,
+					'userid': role
+				},
+				success: function(result) {
+					if (result == 'good') {
+						$("#org_create").submit()
+					} else if (result == 'bad') {
+						//createUserErrorMsg.html('Username already taken.').show()
+					}
+				}
+			})
 		}
 	})
 	
