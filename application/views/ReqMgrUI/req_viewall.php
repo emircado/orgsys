@@ -4,6 +4,7 @@
 	<?php if ('Associate Dean' == $curr_user['user_role']) { ?>
 		<a href = "<?php echo site_url('requirements/createreq') ?>">Create Requirements Checklist</a><br/>
 		<a href = "<?php echo site_url('requirements/') ?>">Edit Requirements Checklist</a><br/>
+		<a href = "<?php echo site_url('requirements/upload_req') ?>">Upload Requirements</a><br/>
 	<?php } ?>
 
 	<?php 

@@ -1,5 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+$config['dropbox_key'] = '71nr2cg01rwwobi';
+$config['dropbox_secret'] = 'rjlan2mruef8w90';
 /*
 |--------------------------------------------------------------------------
 | Base Site URL

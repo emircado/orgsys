@@ -5,6 +5,9 @@ class Requirements extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model(array('requirement', 'schoolyear'));
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('session');
+        $this->load->helper('url');
 	}
 
 	public function index() {
@@ -170,5 +173,73 @@ class Requirements extends CI_Controller {
 			//$this->requirement->delete_reqlist();
 			redirect('main', 'refresh'); 
 		} 
+	}
+	
+	public function upload_req(){
+		$data['curr_user'] = $this->session->userdata('current_user');
+		if ($data['curr_user'] != NULL && 
+			'Associate Dean' == $data['curr_user']['user_role']){
+			$data['title'] = 'Upload Requirements';
+		}
+		
+		$this->load->view('headandfoot/header', $data);
+		$this->load->view('headandfoot/nav', $data);
+		$this->load->view('ReqMgrUI/req_upload_form', array('error' => ' ' ));
+		$this->load->view('headandfoot/footer');
+	}
+	
+	public function do_upload()
+	{
+		$data['curr_user'] = $this->session->userdata('current_user');
+		if ($data['curr_user'] != NULL && 
+			'Associate Dean' == $data['curr_user']['user_role']){
+			$data['title'] = 'Upload Requirements';
+		}
+		$data['title'] = 'Upload Requirements';
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png|pdf';
+		$config['overwrite'] = TRUE;
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload())
+		{
+			$error = array('error' => $this->upload->display_errors());
+			$data['title'] = 'Upload Requirements';
+			$this->load->view('headandfoot/header', $data);
+			$this->load->view('headandfoot/nav', $data);
+			$this->load->view('ReqMgrUI/req_upload_form', $error);
+			$this->load->view('headandfoot/footer');
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+			$params['key'] = $this->config->item('dropbox_key');
+			$params['secret'] = $this->config->item('dropbox_secret');
+			$params['access'] = array('oauth_token'=>urlencode($this->session->userdata('oauth_token')),
+									  'oauth_token_secret'=>urlencode($this->session->userdata('oauth_token_secret')));
+			
+			$this->load->library('dropbox', $params);
+			$dbpath = '/OrgSys';
+			$filepath = $data['upload_data']['full_path'];
+			$params = array();
+			$root='dropbox';
+			$data['curr_user'] = $this->session->userdata('current_user');
+			if(!$this->dropbox->add($dbpath, $filepath,$params, $root)){
+				$data['title'] = 'Upload Requirements';
+				$error = array('error' => 'Authentication Failed');
+				$this->load->view('headandfoot/header', $data);
+				$this->load->view('headandfoot/nav', $data);
+				$this->load->view('ReqMgrUI/req_upload_form', $error);
+				$this->load->view('headandfoot/footer');
+			}
+			else{
+				$dbobj = $this->dropbox->account();
+				$data['title'] = 'Upload Requirements';
+				$this->load->view('headandfoot/header', $data);
+				$this->load->view('headandfoot/nav', $data);
+				$this->load->view('ReqMgrUI/req_upload_success', $data);
+				$this->load->view('headandfoot/footer');
+			}
+		}
 	}
 }
