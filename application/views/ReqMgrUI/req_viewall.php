@@ -1,7 +1,12 @@
 <div>
-	VIEW REQUIREMENTS <br/>
 
-	<?php if ('Associate Dean' == $curr_user['user_role']) { ?>
+<table width="70%" border="0" align="center" cellpadding="15" cellspacing="0" class="roundedTable">
+  <tr align="center">
+    <td></td>
+    <td align="center">
+		
+        <h2>View Requirements</h2>
+            	<?php if ('Associate Dean' == $curr_user['user_role']) { ?>
 		<a href = "<?php echo site_url('requirements/createreq') ?>">Create Requirements Checklist</a><br/>
 		<a href = "<?php echo site_url('requirements/') ?>">Edit Requirements Checklist</a><br/>
 	<?php } ?>
@@ -34,4 +39,9 @@
 		}
 	?>
 
+    </td>
+    <td></td>
+  </table>
+
+	
 </div>
