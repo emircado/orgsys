@@ -15,7 +15,7 @@
                   <tr>
                   </tr>
                   <tr valign="top">
-                    <td width="32%" height="338"><h3><strong>Contact Information</strong></h3>
+                    <td width="32%" height="338" style="color:#FFF"><h3><strong>Contact Information</strong></h3>
                       <p class="bottom_text">Melchor Hall, Osmena Ave.,<br />
                         University of the Philippines<br />
                         Diliman, Quezon City, Philippines 1101</p>
@@ -28,16 +28,16 @@
                       <p class="bottom_text"><strong>National Graduate School of Engineering</strong><br />
                         Telephone: +63 2 926 0703, +63 2 981 8500 loc. 3105-3106<br />
                         Email: ngse@coe.upd.edu.ph</p></td>
-                    <td width="38%" style="color:#000;" align="right"><h3><strong>Quick links</strong></h3>
-                      <p class="bottom_links"><a href="https://mail.up.edu.ph/">UP Webmail</a><br />
-                        <a href="https://crs.upd.edu.ph/">UP Computerized Registration System</a><br />
-                        <a href="http://uvle.up.edu.ph/">UP Virtual Learning Environment</a><br />
-                        <a href="http://ilib.upd.edu.ph/">UP Integrated Library System</a><br />
-                        <a href="https://mail.up.edu.ph/local/files/aup.html">UP Acceptable Use Policy (AUP) for IT Resources</a><br />
-                        <a href="http://time.upd.edu.ph/">UP Diliman Official Time</a></p></td>
+                    <td width="38%" align="right" style="color:#FFF"><h3><strong>Quick links</strong></h3>
+                      <p style="color:#FFF"><a href="https://mail.up.edu.ph/" style="color:#FFF">UP Webmail</a><br />
+                        <a href="https://crs.upd.edu.ph/" style="color:#FFF">UP Computerized Registration System</a><br />
+                        <a href="http://uvle.up.edu.ph/" style="color:#FFF">UP Virtual Learning Environment</a><br />
+                        <a href="http://ilib.upd.edu.ph/" style="color:#FFF">UP Integrated Library System</a><br />
+                        <a href="https://mail.up.edu.ph/local/files/aup.html" style="color:#FFF">UP Acceptable Use Policy (AUP) for IT Resources</a><br />
+                        <a href="http://time.upd.edu.ph/" style="color:#FFF">UP Diliman Official Time</a></p></td>
                   </tr>
                   </table>
-                  <p align="center">Copyright &copy; 2013. ChicharongFlower. All rights reserved.</p>
+                  <p align="center" style="color:#FFF">Copyright &copy; 2013. ChicharongFlower. All rights reserved.</p>
             
                 
                 </td>

@@ -61,6 +61,15 @@ CREATE TABLE IF NOT EXISTS `Requirement` (
 	CONSTRAINT `requirementFKschoolyear` FOREIGN KEY (`syid`) REFERENCES `schoolyear` (`syid`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS `upload`;
+CREATE TABLE IF NOT EXISTS `Uploads` (
+	`upid` INTEGER AUTO_INCREMENT,
+	`filename` VARCHAR(100) NOT NULL,
+	`filepath` VARCHAR(300) NOT NULL,
+	`uptime` TIMESTAMP DEFAULT '0000-00-00 00:00:00',
+	CONSTRAINT `uploadPK` PRIMARY KEY (`upid`)
+) ENGINE=InnoDB;
+
 -- FOR TESTING
 INSERT INTO `requirement` (`name`, `description`, `userid`, `syid`) VALUES 
 ('Report on previous AY\'s activities',

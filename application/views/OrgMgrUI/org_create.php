@@ -29,6 +29,12 @@
                     echo '<option value='.$r->unithead.'>'.$r->deptname.'</option>';
                 } ?>
             </select> <br/>
+			<?php foreach($requirements as $req){?>
+				<tr>
+					<td style="text-align: right"> <label for="<?php echo $req->reqname ?>">.<?php echo $req->reqname ?>.</label></td>
+					<td style="text-align: center"><input type="text" name="code" id="input_createocode"/></td>
+				</tr>
+			<?php } ?>
                  <input type="submit" id="org_createbutton" name="create" value="Create" />
                 </td>
             </tr>

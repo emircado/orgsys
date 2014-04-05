@@ -181,7 +181,6 @@ class Requirements extends CI_Controller {
 			'Associate Dean' == $data['curr_user']['user_role']){
 			$data['title'] = 'Upload Requirements';
 		}
-		
 		$this->load->view('headandfoot/header', $data);
 		$this->load->view('headandfoot/nav', $data);
 		$this->load->view('ReqMgrUI/req_upload_form', array('error' => ' ' ));
@@ -190,6 +189,7 @@ class Requirements extends CI_Controller {
 	
 	public function do_upload()
 	{
+		print_r($this->input->post('dept'));
 		$data['curr_user'] = $this->session->userdata('current_user');
 		if ($data['curr_user'] != NULL && 
 			'Associate Dean' == $data['curr_user']['user_role']){
@@ -201,45 +201,62 @@ class Requirements extends CI_Controller {
 		$config['overwrite'] = TRUE;
 		$this->load->library('upload', $config);
 
-		if ( ! $this->upload->do_upload())
-		{
-			$error = array('error' => $this->upload->display_errors());
+		
+		$ok = 1;
+		foreach($_FILES as $field => $file)
+        {
+            // No problems with the file
+            if($file['error'] == 0)
+            {
+                // So lets upload
+                if ($this->upload->do_upload($field))
+                {
+                    $data = $this->upload->data();
+					$data['curr_user'] = $this->session->userdata('current_user');
+					$data = array('upload_data' => $this->upload->data());
+					$params['key'] = $this->config->item('dropbox_key');
+					$params['secret'] = $this->config->item('dropbox_secret');
+					$params['access'] = array('oauth_token'=>urlencode($this->session->userdata('oauth_token')),
+											  'oauth_token_secret'=>urlencode($this->session->userdata('oauth_token_secret')));
+					
+					$this->load->library('dropbox', $params);
+					$dbpath = '/OrgSys';
+					$filepath = $data['upload_data']['full_path'];
+					$params = array();
+					$root='dropbox';
+					$data['curr_user'] = $this->session->userdata('current_user');
+					if(!$this->dropbox->add($dbpath, $filepath,$params, $root)){
+						$data['curr_user'] = $this->session->userdata('current_user');
+						$data['title'] = 'Upload Requirements';
+						$error = array('error' => 'Authentication Failed');
+						$this->load->view('headandfoot/header', $data);
+						$this->load->view('headandfoot/nav', $data);
+						$this->load->view('ReqMgrUI/req_upload_form', $error);
+						$this->load->view('headandfoot/footer');
+					}
+                }
+                else
+                {
+                    $errors = $this->upload->display_errors();
+					$ok = 0;
+                }
+            }
+        }
+		if($ok==0){
+			$data['curr_user'] = $this->session->userdata('current_user');
 			$data['title'] = 'Upload Requirements';
 			$this->load->view('headandfoot/header', $data);
 			$this->load->view('headandfoot/nav', $data);
 			$this->load->view('ReqMgrUI/req_upload_form', $error);
 			$this->load->view('headandfoot/footer');
 		}
-		else
-		{
-			$data = array('upload_data' => $this->upload->data());
-			$params['key'] = $this->config->item('dropbox_key');
-			$params['secret'] = $this->config->item('dropbox_secret');
-			$params['access'] = array('oauth_token'=>urlencode($this->session->userdata('oauth_token')),
-									  'oauth_token_secret'=>urlencode($this->session->userdata('oauth_token_secret')));
-			
-			$this->load->library('dropbox', $params);
-			$dbpath = '/OrgSys';
-			$filepath = $data['upload_data']['full_path'];
-			$params = array();
-			$root='dropbox';
+		else{
 			$data['curr_user'] = $this->session->userdata('current_user');
-			if(!$this->dropbox->add($dbpath, $filepath,$params, $root)){
-				$data['title'] = 'Upload Requirements';
-				$error = array('error' => 'Authentication Failed');
-				$this->load->view('headandfoot/header', $data);
-				$this->load->view('headandfoot/nav', $data);
-				$this->load->view('ReqMgrUI/req_upload_form', $error);
-				$this->load->view('headandfoot/footer');
-			}
-			else{
-				$dbobj = $this->dropbox->account();
-				$data['title'] = 'Upload Requirements';
-				$this->load->view('headandfoot/header', $data);
-				$this->load->view('headandfoot/nav', $data);
-				$this->load->view('ReqMgrUI/req_upload_success', $data);
-				$this->load->view('headandfoot/footer');
-			}
+			$data['title'] = 'Upload Requirements';
+			$this->load->view('headandfoot/header', $data);
+			$this->load->view('headandfoot/nav', $data);
+			$this->load->view('ReqMgrUI/req_upload_success');
+			$this->load->view('headandfoot/footer');
 		}
 	}
 }
