@@ -19,11 +19,13 @@
 	<br/>
 <strong><div style="font-size:20px" align="left">REQUIREMENTS</div>
 </strong>
-	<a href = "<?php echo site_url('requirements') ?>">View Requirements Checklist</a> 
+	<a href = "<?php echo site_url('requirements/view') ?>">View Requirements Checklist</a> 
 	<?php if ('Associate Dean' == $curr_user['user_role']) { ?>
-		|| <a href = "<?php echo site_url('requirements/createreq') ?>">Create Requirements Checklist</a> || 
-		<a href = "<?php echo site_url('requirements/') ?>">Edit Requirements Checklist</a> ||
-		<a href = "<?php echo site_url('requirements/upload_req') ?>">Upload Requirements</a>
+		|| <a href = "<?php echo site_url('requirements/createreq') ?>">Create/Edit Requirements Checklist</a> || 
+		
+        <!--<a href = "<?php echo site_url('requirements/') ?>">Edit Requirements Checklist</a> ||-->
+		
+        <a href = "<?php echo site_url('requirements/upload_req') ?>">Upload Requirements</a>
 		<?php } ?>		
     </td>
     <td></td>

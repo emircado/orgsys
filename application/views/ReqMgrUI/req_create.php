@@ -8,25 +8,28 @@
 		echo validation_errors();
 		echo ' <h2>Create Requirements</h2>';
 		echo form_open('requirements/submit_req');
+		
+		
+		echo '<table width="70%" border="0" align="center" cellpadding="20" cellspacing="0">';
 		for($i = 0; $i < count($reqlist); $i++) {
-			echo ($i+1).'</br>';
-			echo form_label('Requirements', 'req');
+			echo '<tr><td rowspan="2" align="right" valign="top">'.($i+1).'</td>';
+			echo '<td align="left" valign="bottom">'.form_label('Requirement : ', 'req').'<br>';
 			$data = array(
               'name'        => 'req['.$i.']',
               'value'       => $reqlist[$i]->reqname,
-              'size'        => '56',
+              'size'        => '60',
             );
-			echo form_input($data).'<br/>';
-			echo form_label('Description:', 'desc');
+			echo form_input($data).'</td></tr><tr>';
+			echo '<td align="left" valign="bottom">'.form_label('Description : ', 'desc')."<br>";
 			$data = array(
               'name'        => 'desc['.$i.']',
               'value'       => $reqlist[$i]->description,
-              'size'        => '71',
+              'size'        => '60',
             );
-			echo form_input($data).'<br/>'.'<br/>';
+			echo form_input($data).'</td></tr>';
 		}
 		$i;
-		
+		echo '</table>';
 		/*for($i = count($reqlist); $i < 10; $i++) {
 			echo ($i+1).'</br>';
 			echo form_label('Requirements', 'req');
