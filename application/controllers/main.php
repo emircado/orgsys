@@ -34,8 +34,8 @@ class Main extends CI_Controller {
 		} else {
 			//error: role not found
 		}
-		if($this->session->userdata('oauth_token')==NULL OR $this->session->userdata('oauth_token')==NULL)
-			redirect('dropboxAPI/request_dropbox');
+		//if($this->session->userdata('oauth_token')==NULL OR $this->session->userdata('oauth_token')==NULL)
+		//	redirect('dropboxAPI/request_dropbox');
 	}
 
 	public function login() {

@@ -25,7 +25,7 @@
 		
         <!--<a href = "<?php echo site_url('requirements/') ?>">Edit Requirements Checklist</a> ||-->
 		
-        <a href = "<?php echo site_url('requirements/upload_req') ?>">Upload Requirements</a>
+        <a href = "<?php echo site_url('requirements/select_org') ?>">Upload Requirements</a>
 		<?php } ?>		
     </td>
     <td></td>

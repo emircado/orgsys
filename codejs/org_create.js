@@ -8,7 +8,6 @@ $(window).load(function (){
 	$("#org_createbutton").click(function (e) {
 		e.preventDefault()
 		clear_errors()
-
 		var name = $("#input_createoname").val().trim()
 		var code = $("#input_createocode").val().trim()
 		var role = $("#input_createodept").val()

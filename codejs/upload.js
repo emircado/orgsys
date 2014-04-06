@@ -11,14 +11,14 @@ $(window).load(function (){
 				data: {
 					'name': dept
 				},
-				success: function(result) {
+				/*success: function(result) {
 					if (result == 'good') {
 						$("#shirt").submit()
 					} 
 					else if (result == 'bad') {
 						//createUserErrorMsg.html('Username already taken.').show()
 					}
-				}
+				}*/
 			})
 		}
 	})

@@ -7,7 +7,7 @@
 		
         <h2>Requirements Upload</h2>
             <h3>The requirement was successfully uploaded.</h3>
-			<p><?php echo anchor('requirements/upload_req', 'Upload Another Requirement'); ?></p>
+			<p><?php echo anchor('requirements/select_org', 'Upload Another Requirement'); ?></p>
 
     </td>
     <td></td>

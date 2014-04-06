@@ -4,7 +4,7 @@ class Requirements extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model(array('requirement', 'schoolyear'));
+		$this->load->model(array('requirement', 'schoolyear','organization'));
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('session');
         $this->load->helper('url');
@@ -175,43 +175,68 @@ class Requirements extends CI_Controller {
 		} 
 	}
 	
-	public function upload_req(){
+	public function select_org(){
 		$data['curr_user'] = $this->session->userdata('current_user');
+		$data['title'] = 'Upload Requirements';
+		$unitheadid = NULL;
+		
 		if ($data['curr_user'] != NULL && 
 			'Associate Dean' == $data['curr_user']['user_role']){
-			$data['title'] = 'Upload Requirements';
 		}
+		if ('Unit Head' == $data['curr_user']['user_role']) {
+				$unitheadid = $data['curr_user']['userid'];
+		}
+		
+		$data['organizations'] = $this->organization->get_orglist($unitheadid);
+		
 		$this->load->view('headandfoot/header', $data);
 		$this->load->view('headandfoot/nav', $data);
-		$this->load->view('ReqMgrUI/req_upload_form', array('error' => ' ' ));
+		$this->load->view('ReqMgrUI/req_slctorg', array('error' => ' ' ));
 		$this->load->view('headandfoot/footer');
 	}
 	
-	public function do_upload()
+	public function upload_req($orgname){
+		$data['curr_user'] = $this->session->userdata('current_user');
+		$data['title'] = 'Upload Requirements - '.urldecode($orgname);
+		
+		if ($data['curr_user'] != NULL && 
+			'Associate Dean' == $data['curr_user']['user_role']){
+		}
+		$data['schoolyear'] = $this->schoolyear->get_active_sy();
+		$data['requirements'] = $this->requirement->get_reqlist($data['schoolyear']->syid);
+		$this->load->view('headandfoot/header', $data);
+		$this->load->view('headandfoot/nav', $data);
+		$this->load->view('ReqMgrUI/req_upload_form', array('error' => ' ','orgname' => urldecode($orgname)),$data['requirements']);
+		$this->load->view('headandfoot/footer');
+	}
+	
+	public function do_upload($orgname)
 	{
-		print_r($this->input->post('dept'));
 		$data['curr_user'] = $this->session->userdata('current_user');
 		if ($data['curr_user'] != NULL && 
 			'Associate Dean' == $data['curr_user']['user_role']){
 			$data['title'] = 'Upload Requirements';
 		}
 		$data['title'] = 'Upload Requirements';
-		$config['upload_path'] = './uploads/';
+		$ok = 1;
 		$config['allowed_types'] = 'gif|jpg|png|pdf';
 		$config['overwrite'] = TRUE;
-		$this->load->library('upload', $config);
-
-		
-		$ok = 1;
+		$uploads = 0;
+		$data['schoolyear'] = $this->schoolyear->get_active_sy();
+		$data['requirements'] = $this->requirement->get_reqlist($data['schoolyear']->syid);
 		foreach($_FILES as $field => $file)
         {
             // No problems with the file
-            if($file['error'] == 0)
+            if($file['error'] == 0&&$file['name']!=NULL)
             {
                 // So lets upload
+				$config['upload_path'] = './uploads/'.urldecode($orgname).'/'.$data['requirements'][$uploads]->reqname.'/';
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
                 if ($this->upload->do_upload($field))
                 {
-                    $data = $this->upload->data();
+                    /*uncomment this one wala akong net kaya di ko nilalagay
+					$data = $this->upload->data();
 					$data['curr_user'] = $this->session->userdata('current_user');
 					$data = array('upload_data' => $this->upload->data());
 					$params['key'] = $this->config->item('dropbox_key');
@@ -220,7 +245,7 @@ class Requirements extends CI_Controller {
 											  'oauth_token_secret'=>urlencode($this->session->userdata('oauth_token_secret')));
 					
 					$this->load->library('dropbox', $params);
-					$dbpath = '/OrgSys';
+					$dbpath = '/OrgSys/'.urldecode($orgname).'/'.$data['requirements'][$uploads]->reqname.'/';
 					$filepath = $data['upload_data']['full_path'];
 					$params = array();
 					$root='dropbox';
@@ -233,7 +258,7 @@ class Requirements extends CI_Controller {
 						$this->load->view('headandfoot/nav', $data);
 						$this->load->view('ReqMgrUI/req_upload_form', $error);
 						$this->load->view('headandfoot/footer');
-					}
+					}*/
                 }
                 else
                 {
@@ -241,6 +266,7 @@ class Requirements extends CI_Controller {
 					$ok = 0;
                 }
             }
+			$uploads = $uploads + 1;
         }
 		if($ok==0){
 			$data['curr_user'] = $this->session->userdata('current_user');
@@ -258,5 +284,12 @@ class Requirements extends CI_Controller {
 			$this->load->view('ReqMgrUI/req_upload_success');
 			$this->load->view('headandfoot/footer');
 		}
+	}
+	
+	public function update_reqstatus(){
+		#gawa ka nalang ng database para sa requirements kung saan yung fields ay name ng org tapos yung iba pa ay for req 1 etc... assume natin na di na magagalaw yung req para di muna kelangan gawin tong dynamic
+		#after nun kapag klinick nila yung approve edi dapat ok na sila sa requirement na yun. Gawin mo lang yung parang sa 191. Sorry medyo inaantok na rin ako
+		#maaga pa ako mamaya :( sorry talaga huhuhu. Anchor yung ginagamit ko sa pagpass ng variable from view to controller mas madali. Search mo nalang.
+		#ang irereturn nito na view ay 'OrgMgrUI/org_status'. Gayahin mo yung sa organizations/org_status
 	}
 }

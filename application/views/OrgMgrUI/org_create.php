@@ -6,7 +6,7 @@
     <td align="center">
 	
 
- <form id="org_create" method="post" accept-charset="utf-8" action="<?php echo site_url('organizations') ?>">
+ <form id="org_create" method="post" accept-charset="utf-8" enctype="multipart/form-data" action="<?php echo site_url('organizations') ?>" >
         <table width="300" border="0" align="center" cellpadding="2" cellspacing="2" class="roundedTable">
         	<tr>
                 <td colspan="2" align="center"><h2>Create an Organization</h2></td>
@@ -29,15 +29,10 @@
                     echo '<option value='.$r->unithead.'>'.$r->deptname.'</option>';
                 } ?>
             </select> <br/>
-			<?php foreach($requirements as $req){?>
 				<tr>
-					<td style="text-align: right"> <label for="<?php echo $req->reqname ?>">.<?php echo $req->reqname ?>.</label></td>
-					<td style="text-align: center"><input type="text" name="code" id="input_createocode"/></td>
+				<td></td>
+                 <td><input type="submit" id="org_createbutton" name="create" value="Create" /></td>
 				</tr>
-			<?php } ?>
-                 <input type="submit" id="org_createbutton" name="create" value="Create" />
-                </td>
-            </tr>
         </table>
         </form>
         

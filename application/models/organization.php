@@ -44,6 +44,4 @@ class Organization extends CI_Model{
 	public function create_org($orgdata) {
 		$this->db->insert('organization', $orgdata);
 	}
-	
-	
 }

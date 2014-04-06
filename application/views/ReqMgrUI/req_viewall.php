@@ -8,7 +8,7 @@
         <strong><h2>View Requirements</h2></strong>
             	<?php if ('Associate Dean' == $curr_user['user_role']) { ?>
 		<a href = "<?php echo site_url('requirements/createreq') ?>">Create/Edit Requirements Checklist</a><br/>
-		<a href = "<?php echo site_url('requirements/upload_req') ?>">Upload Requirements</a><br/>
+		<a href = "<?php echo site_url('requirements/select_org') ?>">Upload Requirements</a><br/>
 	<?php } ?>
 		</div><br /><br />
 

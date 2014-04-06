@@ -32,7 +32,7 @@ class DropboxAPI extends CI_Controller
 		
 		$this->session->set_userdata('oauth_token', $oauth['oauth_token']);
 		$this->session->set_userdata('oauth_token_secret', $oauth['oauth_token_secret']);
-        redirect('dropboxAPI/test_dropbox');
+        redirect('main','refresh');
 	}
 	//Once your application is approved you can proceed to load the library
     //with the access token data stored in the session. If you see your account
