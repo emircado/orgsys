@@ -158,7 +158,7 @@ class Requirements extends CI_Controller {
 					if($data['req'][$i]) {
 						$reqdata = array( 
 							'name' => $data['req'][$i],
-							'description' => $item,
+							'description' => str_replace("\n", "||", $item),
 							'userid' => $session_data['userid'],
 							'syid' => $this->schoolyear->get_active_sy()->syid
 						);
@@ -171,7 +171,7 @@ class Requirements extends CI_Controller {
 			//} 
 			//$this->load->view('UserMgrUI/trial', $userdata);
 			//$this->requirement->delete_reqlist();
-			redirect('main', 'refresh'); 
+			redirect('requirements/view', 'refresh'); 
 		} 
 	}
 	
@@ -235,30 +235,31 @@ class Requirements extends CI_Controller {
 				$this->upload->initialize($config);
                 if ($this->upload->do_upload($field))
                 {
-                    /*uncomment this one wala akong net kaya di ko nilalagay
-					$data = $this->upload->data();
-					$data['curr_user'] = $this->session->userdata('current_user');
-					$data = array('upload_data' => $this->upload->data());
-					$params['key'] = $this->config->item('dropbox_key');
-					$params['secret'] = $this->config->item('dropbox_secret');
-					$params['access'] = array('oauth_token'=>urlencode($this->session->userdata('oauth_token')),
-											  'oauth_token_secret'=>urlencode($this->session->userdata('oauth_token_secret')));
+                    //comment when no internet
+					// $data = $this->upload->data();
+					// $data['curr_user'] = $this->session->userdata('current_user');
+					// $data = array('upload_data' => $this->upload->data());
+					// $params['key'] = $this->config->item('dropbox_key');
+					// $params['secret'] = $this->config->item('dropbox_secret');
+					// $params['access'] = array('oauth_token'=>urlencode($this->session->userdata('oauth_token')),
+					// 						  'oauth_token_secret'=>urlencode($this->session->userdata('oauth_token_secret')));
 					
-					$this->load->library('dropbox', $params);
-					$dbpath = '/OrgSys/'.urldecode($orgname).'/'.$data['requirements'][$uploads]->reqname.'/';
-					$filepath = $data['upload_data']['full_path'];
-					$params = array();
-					$root='dropbox';
-					$data['curr_user'] = $this->session->userdata('current_user');
-					if(!$this->dropbox->add($dbpath, $filepath,$params, $root)){
-						$data['curr_user'] = $this->session->userdata('current_user');
-						$data['title'] = 'Upload Requirements';
-						$error = array('error' => 'Authentication Failed');
-						$this->load->view('headandfoot/header', $data);
-						$this->load->view('headandfoot/nav', $data);
-						$this->load->view('ReqMgrUI/req_upload_form', $error);
-						$this->load->view('headandfoot/footer');
-					}*/
+					// $this->load->library('dropbox', $params);
+					// $dbpath = '/OrgSys/'.urldecode($orgname).'/'.$data['requirements'][$uploads]->reqname.'/';
+					// $filepath = $data['upload_data']['full_path'];
+					// $params = array();
+					// $root='dropbox';
+					// $data['curr_user'] = $this->session->userdata('current_user');
+					// if(!$this->dropbox->add($dbpath, $filepath,$params, $root)){
+					// 	$data['curr_user'] = $this->session->userdata('current_user');
+					// 	$data['title'] = 'Upload Requirements';
+					// 	$error = array('error' => 'Authentication Failed');
+					// 	$this->load->view('headandfoot/header', $data);
+					// 	$this->load->view('headandfoot/nav', $data);
+					// 	$this->load->view('ReqMgrUI/req_upload_form', $error);
+					// 	$this->load->view('headandfoot/footer');
+					// }
+					//till here
                 }
                 else
                 {
@@ -273,7 +274,7 @@ class Requirements extends CI_Controller {
 			$data['title'] = 'Upload Requirements';
 			$this->load->view('headandfoot/header', $data);
 			$this->load->view('headandfoot/nav', $data);
-			$this->load->view('ReqMgrUI/req_upload_form', $error);
+			$this->load->view('ReqMgrUI/req_upload_form', $data);
 			$this->load->view('headandfoot/footer');
 		}
 		else{

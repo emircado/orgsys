@@ -5,6 +5,13 @@
     <td></td>
     <td align="center">
         <h2>Upload Requirements of Organizations</h2>
+    
+        <!-- SIDEBAR -->
+      <?php if ('Associate Dean' == $curr_user['user_role']) { ?>
+        <a href = "<?php echo site_url('requirements/createreq') ?>">Create/Edit Requirements Checklist</a><br/>
+        <a href = "<?php echo site_url('requirements/select_org') ?>">Upload Requirements</a><br/>
+      <?php } ?>
+      
     </td>
   </tr>
    </table></br>

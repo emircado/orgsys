@@ -6,12 +6,14 @@
     <td align="center">
 	
 
- <form id="org_create" method="post" accept-charset="utf-8" enctype="multipart/form-data" action="<?php echo site_url('organizations') ?>" >
+ <form id="org_create" method="post" accept-charset="utf-8" enctype="multipart/form-data" action="<?php echo site_url('organizations/submit_org') ?>" >
         <table width="300" border="0" align="center" cellpadding="2" cellspacing="2" class="roundedTable">
         	<tr>
                 <td colspan="2" align="center"><h2>Create an Organization</h2></td>
             </tr>
             
+            <div class="error" id="org_createerror"></div>
+
             <tr>
                 <td width="105" style="text-align: right"> <label for="name">Name</label></td>
                 <td width="181" style="text-align: center"><input type="text" name="name" id="input_createoname"/></td>

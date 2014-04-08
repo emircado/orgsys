@@ -5,11 +5,15 @@
     <td></td>
     <td align="left" width="70%">
 		<div align="center">
-        <strong><h2>View Requirements</h2></strong>
-            	<?php if ('Associate Dean' == $curr_user['user_role']) { ?>
+     
+    <strong><h2>View Requirements</h2></strong>
+	
+	<!-- SIDEBAR -->
+    <?php if ('Associate Dean' == $curr_user['user_role']) { ?>
 		<a href = "<?php echo site_url('requirements/createreq') ?>">Create/Edit Requirements Checklist</a><br/>
 		<a href = "<?php echo site_url('requirements/select_org') ?>">Upload Requirements</a><br/>
 	<?php } ?>
+
 		</div><br /><br />
 
 			<?php 
@@ -31,7 +35,9 @@
 						foreach($reqlist as $req) {
 							
 							echo '<strong>'.$req->reqname.'</strong>';
-							echo '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$req->description."<br><br>";
+							foreach (explode("||", $req->description) as $desc)
+								echo '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$desc;
+							echo "<br><br>";
 		
 						}
 					}

@@ -38,9 +38,9 @@ $(window).load(function (){
 		}
 	})
 
-	$("#user_loginbuttonz").click(function (e){
-		alert('asdf')
-	})
+	// $("#user_loginbuttonz").click(function (e){
+	// 	alert('asdf')
+	// })
 
 	$("#org_loginbutton").click(function (e) {
 		e.preventDefault()
@@ -63,7 +63,8 @@ $(window).load(function (){
 					if (result == 'good') {
 						$("#org_login").submit()
 					} else if (result == 'bad') {
-						orgErrorMsg.html("Invalid key").show()
+						clear_errors()
+						orgErrorMsg.html("Bad key").show()
 					}
 				}
 			})

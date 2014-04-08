@@ -4,7 +4,13 @@
   <tr align="center">
     <td></td>
     <td align="center">
-            	<?php
+    <!-- SIDEBAR -->
+    <?php if ('Associate Dean' == $curr_user['user_role']) { ?>
+		<a href = "<?php echo site_url('requirements/createreq') ?>">Create/Edit Requirements Checklist</a><br/>
+		<a href = "<?php echo site_url('requirements/select_org') ?>">Upload Requirements</a><br/>
+	<?php } ?>
+
+    <?php
 		echo validation_errors();
 		echo ' <h2>Create Requirements</h2>';
 		echo form_open('requirements/submit_req');
@@ -23,10 +29,10 @@
 			echo '<td align="left" valign="bottom">'.form_label('Description : ', 'desc')."<br>";
 			$data = array(
               'name'        => 'desc['.$i.']',
-              'value'       => $reqlist[$i]->description,
+              'value'       => str_replace("||", "\n", $reqlist[$i]->description),
               'size'        => '60',
             );
-			echo form_input($data).'</td></tr>';
+			echo form_textarea($data).'</td></tr>';
 		}
 		$i;
 		echo '</table>';

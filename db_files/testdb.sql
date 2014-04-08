@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `organization` (
 	`name` VARCHAR(100) NOT NULL,
 	`code` VARCHAR(20) NOT NULL,
 	`viewkey` VARCHAR(10) UNIQUE NOT NULL,
-	`status` BOOLEAN NOT NULL DEFAULT 1,
+	`status` BOOLEAN NOT NULL DEFAULT 0,
 	`userid` INTEGER NOT NULL,
 	`syid` INTEGER NOT NULL,
 	CONSTRAINT `organizationPK` PRIMARY KEY (`orgid`),
@@ -121,5 +121,22 @@ CREATE TABLE IF NOT EXISTS `organization` (
 ) ENGINE=InnoDB;
 
 -- DATA FOR TESTING
-INSERT INTO `organization` (`name`, `code`, `viewkey`, `status`, `userid`, `syid`) VALUES 
-('UP Association of Computer Science Majors', 'upcursor', 'key1', 1, 1, 1);
+-- INSERT INTO `organization` (`name`, `code`, `viewkey`, `status`, `userid`, `syid`) VALUES 
+-- ('UP Association of Computer Science Majors', 'upcursor', 'key1', 1, 2, 1);
+
+DROP TABLE IF EXISTS `document`;
+CREATE TABLE IF NOT EXISTS `document` (
+	`docid` INTEGER AUTO_INCREMENT,
+	`orgid` INTEGER NOT NULL,
+	`reqid` INTEGER NOT NULL,
+	`userid` INTEGER NOT NULL,
+	`syid` INTEGER NOT NULL,
+	`link` VARCHAR(200) NOT NULL DEFAULT 'link here',
+	`date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	`status` INTEGER NOT NULL,
+	CONSTRAINT `documentPK` PRIMARY KEY (`docid`),
+	CONSTRAINT `documentFKorganization` FOREIGN KEY (`orgid`) REFERENCES `organization` (`orgid`),
+	CONSTRAINT `documentFKrequirement` FOREIGN KEY (`reqid`) REFERENCES `requirement` (`reqid`),
+	CONSTRAINT `documentFKuser` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`),
+	CONSTRAINT `documentFKschoolyear` FOREIGN KEY (`syid`) REFERENCES `schoolyear` (`syid`)
+) ENGINE=InnoDB;

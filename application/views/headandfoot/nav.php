@@ -5,28 +5,30 @@
     <td></td>
     <td>
     
-        
-    <div style="font-size:20px" align="left"><strong>MANAGEMENT</strong></div>
-    <a href = "<?php echo site_url('main') ?>">
-    Home</a> || 
+    <div style="font-size:20px">
+
+    <a href = "<?php echo site_url('main') ?>">Home</a> || 
 	
+
+    <?php if (isset($curr_user)) { ?>
+
 	<!-- FOR ASSOC DEAN ONLY -->
 	<?php if ('Associate Dean' == $curr_user['user_role']) { ?>
-		<a href = "<?php echo site_url('schoolyears') ?>">Manage School Years</a> || <a href = "<?php echo site_url('users') ?>">Manage User Accounts</a> || 
+		<a href = "<?php echo site_url('schoolyears') ?>">School Years</a> || 
+		<a href = "<?php echo site_url('users') ?>">User Accounts</a> || 
 	<?php } ?>
 
-	<a href = "<?php echo site_url('organizations') ?>">Manage Organizations</a> || <a href = "<?php echo site_url('users/myaccount') ?>">My Account</a><br />
-	<br/>
-<strong><div style="font-size:20px" align="left">REQUIREMENTS</div>
-</strong>
-	<a href = "<?php echo site_url('requirements/view') ?>">View Requirements Checklist</a> 
-	<?php if ('Associate Dean' == $curr_user['user_role']) { ?>
-		|| <a href = "<?php echo site_url('requirements/createreq') ?>">Create/Edit Requirements Checklist</a> || 
-		
-        <!--<a href = "<?php echo site_url('requirements/') ?>">Edit Requirements Checklist</a> ||-->
-		
-        <a href = "<?php echo site_url('requirements/select_org') ?>">Upload Requirements</a>
-		<?php } ?>		
+	<a href = "<?php echo site_url('requirements/view') ?>">Requirements</a> || 
+	<a href = "<?php echo site_url('organizations') ?>">Organizations</a> || 
+	<a href = "<?php echo site_url('users/myaccount') ?>">My Account</a><br />
+	
+	<?php } else if (isset($curr_org)) {?>
+		<a href = "<?php echo site_url('main/org_logout') ?>">Logout</a>
+	<?php } ?>
+
+	<br/>	
+    
+	</div>
     </td>
     <td></td>
   </table>

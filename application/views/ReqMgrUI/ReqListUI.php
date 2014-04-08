@@ -23,7 +23,9 @@
 						foreach($reqlist as $req) {
 							
 							echo '<strong>'.$req->reqname.'</strong>';
-							echo '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$req->description."<br><br>";
+							foreach (explode("||", $req->description) as $desc)
+								echo '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$desc;
+							echo "<br><br>";
 		
 						}
 					}

@@ -10,6 +10,7 @@ class Requirement extends CI_Model{
 	/*************************** Get Functions **************************/
 	public function get_reqlist($syid) {
 		$this->db->select(array(
+				'requirement.reqid as reqid',
 				'requirement.name as reqname',
 				'requirement.description',
 				'user.name as createdby'
