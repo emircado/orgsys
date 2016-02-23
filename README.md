@@ -6,13 +6,13 @@ The challenge that this web app attempted to solve was to automate the currently
 
 -----------------------
 
-# Database Set Up
+### Database Set Up
 
 1. Create a database named `orgsys`
 2. Import the MySQL code from `db_files\testdb.sql` into the database
 3. Configure the database settings found in `application\config\database.php` if necessary
 
-User accounts were created to browse through the application. For example,
+To browse through the app as an admin, the following user credentials may be used:
 ```
 username: sirji
 password: password
